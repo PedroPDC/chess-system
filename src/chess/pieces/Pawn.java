@@ -20,35 +20,29 @@ public class Pawn extends ChessPiece {
         boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
         Position p = new Position(0,0);
 
-        //MOVIMENTOS PEÃO COR BRANCA
         if(getColor() == Color.WHITE){
             p.setValues(position.getRow() - 1, position.getColumn());
-            //se posição existir e nao tiver uma peça, peão pode se mover
             if(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)){
                 mat[p.getRow()][p.getColumn()] = true;
             }
             p.setValues(position.getRow() - 2, position.getColumn());
             Position p2 = new Position(position.getRow() - 1, position.getColumn());
 
-            //se posição existe, nao está ocupada e se é o primeiro movimento, peão pode andar 2 casas
             if(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p) && getBoard().positionExists(p2) &&
                     !getBoard().thereIsAPiece(p2) && getMoveCount() == 0){
                 mat[p.getRow()][p.getColumn()] = true;
             }
 
-            //diagonal esquerda / left diagonal
             p.setValues(position.getRow() - 1, position.getColumn() - 1);
             if(getBoard().positionExists(p) && isThereOpponentPiece(p)){
                 mat[p.getRow()][p.getColumn()] = true;
             }
 
-            //diagonal direita / right diagonal
             p.setValues(position.getRow() - 1, position.getColumn() + 1);
             if(getBoard().positionExists(p) && isThereOpponentPiece(p)){
                 mat[p.getRow()][p.getColumn()] = true;
             }
 
-            // #specialmove en passant white
             if(position.getRow() == 3){
                 Position left = new Position(position.getRow(), position.getColumn() - 1);
                 if(getBoard().positionExists(left) && isThereOpponentPiece(left) && getBoard().piece(left) == chessMatch.getEnPassantVulnerable()){
@@ -60,35 +54,29 @@ public class Pawn extends ChessPiece {
                 }
             }
         }
-        //MOVIMENTOS PEÃO COR PRETA
         else{
             p.setValues(position.getRow() + 1, position.getColumn());
-            //se posição existir e nao tiver uma peça, peão pode se mover
             if(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)){
                 mat[p.getRow()][p.getColumn()] = true;
             }
             p.setValues(position.getRow() + 2, position.getColumn());
             Position p2 = new Position(position.getRow() + 1, position.getColumn());
 
-            //se posição existe, nao está ocupada e se é o primeiro movimento, peão pode andar 2 casas
             if(getBoard().positionExists(p) && !getBoard().thereIsAPiece(p) && getBoard().positionExists(p2) &&
                     !getBoard().thereIsAPiece(p2) && getMoveCount() == 0){
                 mat[p.getRow()][p.getColumn()] = true;
             }
 
-            //diagonal esquerda / left diagonal
             p.setValues(position.getRow() + 1, position.getColumn() - 1);
             if(getBoard().positionExists(p) && isThereOpponentPiece(p)){
                 mat[p.getRow()][p.getColumn()] = true;
             }
 
-            //diagonal direita / right diagonal
             p.setValues(position.getRow() + 1, position.getColumn() + 1);
             if(getBoard().positionExists(p) && isThereOpponentPiece(p)){
                 mat[p.getRow()][p.getColumn()] = true;
             }
 
-            // #specialmove en passant black
             if(position.getRow() == 4){
                 Position left = new Position(position.getRow(), position.getColumn() - 1);
                 if(getBoard().positionExists(left) && isThereOpponentPiece(left) && getBoard().piece(left) == chessMatch.getEnPassantVulnerable()){

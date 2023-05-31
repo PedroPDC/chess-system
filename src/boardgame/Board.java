@@ -19,18 +19,11 @@ public class Board {
         return rows;
     }
 
-    /*metodo setRows retirado para que nao seja alterada a quantidade
-    de linhas com o programa em execução*/
-
     public int getColumns() {
         return columns;
     }
 
-    /*metodo setColumns retirado para que nao seja alterada a quantidade
-    de colunas com o programa em execução*/
-
     public Piece piece(int row, int column){
-        /*se posição nao existir, lançar uma nova boardException*/
         if(!positionExists(row, column)){
             throw new BoardException("Position not on the board");
         }
@@ -45,7 +38,6 @@ public class Board {
     }
 
     public void placePiece(Piece piece, Position position){
-        /*testa se ja nao existe uma peça na posição*/
         if(thereIsAPiece(position)){
             throw new BoardException("There is already a piece on position " + position);
         }
@@ -54,7 +46,6 @@ public class Board {
     }
 
     public Piece removePiece(Position position){
-        //caso a posição nao exista, retorna exceção
         if(!positionExists(position)){
             throw new BoardException("Position not on the board");
         }
@@ -62,13 +53,11 @@ public class Board {
             return null;
         }
         Piece aux = piece(position);
-        aux.position = null; //peça foi retirada do tabuleiro, nao tem mais posição
-        pieces[position.getRow()][position.getColumn()] = null; //na posição onde removemos a peça, será nulo. Indicando que nao há mais peça lá
-        return aux; //peça que foi retirada
+        aux.position = null;
+        pieces[position.getRow()][position.getColumn()] = null;
+        return aux;
     }
 
-    //metodo auxiliar para testar por linha e coluna
-    //para posição existir, ela deve estar dentro do tabuleiro
     private boolean positionExists(int row, int column){
         return row >= 0 && row < rows && column >= 0 && column < columns;
     }
@@ -77,11 +66,9 @@ public class Board {
     }
 
     public boolean thereIsAPiece(Position position){
-        /*antes de testar se existe uma peça ele ja testa se a posição existe*/
         if(!positionExists(position)){
             throw new BoardException("Position not on the board");
         }
-        //se a peça for diferente de nulo, tem uma peça nessa posição
         return piece(position) != null;
     }
 }

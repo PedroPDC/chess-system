@@ -15,11 +15,8 @@ public class Knight extends ChessPiece {
         return "N";
     }
 
-    //metodo auxiliar que dirá se o cavalo pode ou nao se mover para determinada posição
     private boolean canMove(Position position){
         ChessPiece p = (ChessPiece)getBoard().piece(position);
-
-        //verifica se casa é nula ou se a cor da peça é diferente
         return p == null || p.getColor() != getColor();
     }
 
@@ -28,8 +25,6 @@ public class Knight extends ChessPiece {
         boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
 
         Position p = new Position(0,0);
-
-        //testa cada uma das posições que um cavalo pode se mover
 
         p.setValues(position.getRow() - 1, position.getColumn() - 2);
         if (getBoard().positionExists(p) && canMove(p)) {

@@ -19,13 +19,9 @@ public class ChessPosition {
         return column;
     }
 
-    /*metodo setColumn removido pois colunas nao deverao ser livremente alteradas*/
-
     public int getRow() {
         return row;
     }
-
-    /*metodo setRow removido pois linhas nao deverao ser livremente alteradas*/
 
     protected Position toPosition(){
         return new Position(8 - row, column - 'a');
@@ -37,7 +33,6 @@ public class ChessPosition {
 
     @Override
     public String toString(){
-        //força concatenação de Strings
         return "" + column + row;
     }
 }

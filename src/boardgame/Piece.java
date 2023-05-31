@@ -7,7 +7,7 @@ public abstract class Piece {
 
     public Piece(Board board) {
         this.board = board;
-        position = null; //peça nao foi colocada no tabuleiro ainda, portanto posição é nula
+        position = null;
     }
 
     protected Board getBoard() {
@@ -21,7 +21,6 @@ public abstract class Piece {
     }
 
     public boolean isThereAnyPossibleMove(){
-        //matriz será verdadeira onde peça poderá se mover
         boolean[][] mat = possibleMoves();
         for(int i = 0; i < mat.length; i++){
             for(int j = 0; j < mat.length; j++){

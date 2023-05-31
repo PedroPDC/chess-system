@@ -13,8 +13,6 @@ import java.util.stream.Collectors;
 
 public class UI {
 
-    // https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
-
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";
@@ -34,7 +32,6 @@ public class UI {
     public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
-    // https://stackoverflow.com/questions/2979383/java-clear-the-console
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
@@ -44,8 +41,8 @@ public class UI {
 
         try {
             String s = sc.nextLine();
-            char column = s.charAt(0); //recorta para pegar coluna
-            int row = Integer.parseInt(s.substring(1)); //recorta string apartir da posição 1 e converte para inteiro
+            char column = s.charAt(0);
+            int row = Integer.parseInt(s.substring(1));
             return new ChessPosition(column, row);
         }
         catch(RuntimeException e){
@@ -60,7 +57,6 @@ public class UI {
         System.out.println();
         System.out.println("Turn: " + chessMatch.getTurn());
 
-        //testa se está em checkmate
         if(!chessMatch.getCheckMate()){
             System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
             if(chessMatch.getCheck()){
@@ -88,7 +84,6 @@ public class UI {
         for(int i = 0; i < pieces.length; i++){
             System.out.print((8 - i) + " ");
             for(int j = 0; j < pieces.length; j++){
-                //pinta o fundo colorido dependendo da variavel possibleMoves
                 printPiece(pieces[i][j], possibleMoves[i][j]);
             }
             System.out.println();

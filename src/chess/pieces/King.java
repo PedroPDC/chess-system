@@ -20,11 +20,9 @@ public class King extends ChessPiece {
         return "K";
     }
 
-    //metodo auxiliar que dirá se o rei pode ou nao se mover para determinada posição
     private boolean canMove(Position position){
         ChessPiece p = (ChessPiece)getBoard().piece(position);
 
-        //verifica se casa é nula ou se a cor da peça é diferente
         return p == null || p.getColor() != getColor();
     }
 
@@ -39,58 +37,47 @@ public class King extends ChessPiece {
 
         Position p = new Position(0,0);
 
-        //testa cada uma das posições que um rei pode se mover
-        // ACIMA / ABOVE
         p.setValues(position.getRow() - 1, position.getColumn());
         if(getBoard().positionExists(p) && canMove(p)){
             mat[p.getRow()][p.getColumn()] = true;
         }
 
-        // ABAIXO / BELOW
         p.setValues(position.getRow() + 1, position.getColumn());
         if(getBoard().positionExists(p) && canMove(p)){
             mat[p.getRow()][p.getColumn()] = true;
         }
 
-        // ESQUERDA / LEFT
         p.setValues(position.getRow(), position.getColumn() - 1);
         if(getBoard().positionExists(p) && canMove(p)){
             mat[p.getRow()][p.getColumn()] = true;
         }
 
-        //DIREITA / RIGHT
         p.setValues(position.getRow(), position.getColumn() + 1);
         if(getBoard().positionExists(p) && canMove(p)){
             mat[p.getRow()][p.getColumn()] = true;
         }
 
-        //NOROESTE / NW
         p.setValues(position.getRow() - 1, position.getColumn() - 1);
         if(getBoard().positionExists(p) && canMove(p)){
             mat[p.getRow()][p.getColumn()] = true;
         }
 
-        //NORDESTE / NE
         p.setValues(position.getRow() - 1, position.getColumn() + 1);
         if(getBoard().positionExists(p) && canMove(p)){
             mat[p.getRow()][p.getColumn()] = true;
         }
 
-        //SUDOESTE / SW
         p.setValues(position.getRow() + 1, position.getColumn() - 1);
         if(getBoard().positionExists(p) && canMove(p)){
             mat[p.getRow()][p.getColumn()] = true;
         }
 
-        //SUDESTE / SE
         p.setValues(position.getRow() + 1, position.getColumn() + 1);
         if(getBoard().positionExists(p) && canMove(p)){
             mat[p.getRow()][p.getColumn()] = true;
         }
 
-        // #specialmove castling
         if(getMoveCount() == 0 && !chessMatch.getCheck()){
-            // #specialmove castling kingside rook
             Position posT1 = new Position(position.getRow(), position.getColumn() + 3);
             if(testRookCastling(posT1)){
                 Position p1 = new Position(position.getRow(), position.getColumn() + 1);
@@ -99,7 +86,7 @@ public class King extends ChessPiece {
                     mat[position.getRow()][position.getColumn() + 2] = true;
                 }
             }
-            // #specialmove castling Queenside rook
+
             Position posT2 = new Position(position.getRow(), position.getColumn() - 4);
             if(testRookCastling(posT2)){
                 Position p1 = new Position(position.getRow(), position.getColumn() - 1);
